@@ -1,17 +1,11 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { Formik, Form, Field } from "formik";
 import NumberField from "../../../../components/NumberField/NumberField";
+import propTypes from "prop-types";
 import * as Yup from "yup";
-import { useNavigate } from "react-router-dom";
 
-import { socket } from "../../../../socket";
-import { createRoom } from "../../../../services/room";
-import { LoggedInContext } from "../../../../App";
-
-const GameConfigForm = () => {
-  const [loggedIn] = useContext(LoggedInContext);
-  const navigate = useNavigate();
-  const [error, setError] = useState("");
+const GameConfigForm = ({ createGame }) => {
+  const [error] = useState("");
 
   const validate = Yup.object({
     size: Yup.number()
@@ -35,19 +29,6 @@ const GameConfigForm = () => {
       destroyer > 0 || cruiser > 0 || battleship > 0 || aircraftCarrier > 0
     );
   });
-
-  const handleSubmit = async (gameconfigs) => {
-    if (!loggedIn) {
-      navigate("/login");
-    }
-    const result = await createRoom(gameconfigs);
-    if (result.room) {
-      socket.emit("join", result.room);
-      navigate(`/game/${result.room}`);
-    } else {
-      setError(result.error);
-    }
-  };
 
   return (
     <>
@@ -80,7 +61,7 @@ const GameConfigForm = () => {
             ],
             who_started: parseInt(who_started),
           };
-          handleSubmit(formattedValues);
+          createGame(formattedValues);
         }}
       >
         {() => (
@@ -88,10 +69,22 @@ const GameConfigForm = () => {
             <h4>Want to choose your own?</h4>
             <p>Configure your game below and create your own game.</p>
             <Form className="container inputs">
-              <NumberField data-cy="board-size" label="Board Size:" name="size" />
-              <NumberField data-cy="destroyer" label="Destroyer" name="destroyer" />
+              <NumberField
+                data-cy="board-size"
+                label="Board Size:"
+                name="size"
+              />
+              <NumberField
+                data-cy="destroyer"
+                label="Destroyer"
+                name="destroyer"
+              />
               <NumberField data-cy="cruiser" label="Cruiser" name="cruiser" />
-              <NumberField data-cy="battleship" label="Battleship" name="battleship" />
+              <NumberField
+                data-cy="battleship"
+                label="Battleship"
+                name="battleship"
+              />
               <NumberField
                 data-cy="aircraft-carrier"
                 label="Aircraft Carrier"
@@ -100,14 +93,28 @@ const GameConfigForm = () => {
               />
               <p className="small-text">Who starts?</p>
               <label>
-                <Field data-cy="p1-start" type="radio" name="who_started" value="1" />
+                <Field
+                  data-cy="p1-start"
+                  type="radio"
+                  name="who_started"
+                  value="1"
+                />
                 Me
               </label>
               <label>
-                <Field data-cy="p2-start" type="radio" name="who_started" value="0" />
+                <Field
+                  data-cy="p2-start"
+                  type="radio"
+                  name="who_started"
+                  value="0"
+                />
                 My opponent
               </label>
-              <button data-cy="gameconfig-submit" className="button-join" type="submit">
+              <button
+                data-cy="gameconfig-submit"
+                className="button-join"
+                type="submit"
+              >
                 Create game
               </button>
             </Form>
@@ -118,5 +125,7 @@ const GameConfigForm = () => {
     </>
   );
 };
+
+GameConfigForm.propTypes = { createGame: propTypes.func };
 
 export default GameConfigForm;
