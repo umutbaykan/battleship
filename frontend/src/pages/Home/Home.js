@@ -12,7 +12,7 @@ import { createRoom } from "../../services/room";
 const Home = () => {
   const [loggedIn] = useContext(LoggedInContext);
   const navigate = useNavigate();
-  const [, setError] = useState("");
+  const [ , setError] = useState("");
 
   const createGame = async (gameconfigs) => {
     const result = await createRoom(gameconfigs);

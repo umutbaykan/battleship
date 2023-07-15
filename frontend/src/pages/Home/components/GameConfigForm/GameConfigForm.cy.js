@@ -2,7 +2,8 @@ import GameConfigForm from "./GameConfigForm";
 
 describe("GameConfigForm", () => {
   it("does not throw an error if all values are within allowed boundaries", () => {
-    cy.mount(<GameConfigForm />);
+    const createGameStub = cy.stub().as('createGameStub');
+    cy.mount(<GameConfigForm createGame={createGameStub}/>);
     cy.get('[data-cy="board-size"]').clear();
     cy.get('[data-cy="board-size"]').type(9);
     cy.get('[data-cy="destroyer"]').clear();
@@ -10,8 +11,9 @@ describe("GameConfigForm", () => {
     cy.get('[data-cy="battleship"]').clear();
     cy.get('[data-cy="battleship"]').type(0);
     cy.get('[data-cy="p2-start"]').click();
-    cy.get('[data-cy="gameconfig-submit"]').click();
-  });
+    cy.get('[data-cy="gameconfig-submit"]').click()
+    cy.get('@createGameStub').should('to.be.called');
+    });   
 
   it("with too big board, displays must be less than error", () => {
     cy.mount(<GameConfigForm />);
