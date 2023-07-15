@@ -51,12 +51,12 @@ const LoginForm = () => {
             <div className="container-block login">
               <h3>Log In</h3>
               <Form>
-                <TextField data-cy="username" label="Username" name="username" type="text" />
-                <TextField data-cy="password" label="Password" name="password" type="password" />
-                <button data-cy="login-submit" className="button-join" type="submit">
+                <TextField label="Username" name="username" type="text" />
+                <TextField label="Password" name="password" type="password" />
+                <button className="button-join" type="submit">
                   Login
                 </button>
-                <p data-cy="error-message" className="error">{error}</p>
+                <p className="error">{error}</p>
               </Form>
             </div>
           </div>

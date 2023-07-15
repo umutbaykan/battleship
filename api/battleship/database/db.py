@@ -26,8 +26,3 @@ def seed_test_database(collection, seed_data):
     """
     db[collection].drop()
     db[collection].insert_many(seed_data)
-
-
-def seed_specific_item_with_id(collection, seed_data):
-    # Need to find a way to insert seed data with predefined ID
-    db[collection].insert_one(seed_data)

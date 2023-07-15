@@ -88,26 +88,25 @@ const GameConfigForm = () => {
             <h4>Want to choose your own?</h4>
             <p>Configure your game below and create your own game.</p>
             <Form className="container inputs">
-              <NumberField data-cy="board-size" label="Board Size:" name="size" />
-              <NumberField data-cy="destroyer" label="Destroyer" name="destroyer" />
-              <NumberField data-cy="cruiser" label="Cruiser" name="cruiser" />
-              <NumberField data-cy="battleship" label="Battleship" name="battleship" />
+              <NumberField label="Board Size:" name="size" />
+              <NumberField label="Destroyer" name="destroyer" />
+              <NumberField label="Cruiser" name="cruiser" />
+              <NumberField label="Battleship" name="battleship" />
               <NumberField
-                data-cy="aircraft-carrier"
                 label="Aircraft Carrier"
                 name="aircraftCarrier"
                 type="number"
               />
               <p className="small-text">Who starts?</p>
               <label>
-                <Field data-cy="p1-start" type="radio" name="who_started" value="1" />
+                <Field type="radio" name="who_started" value="1" />
                 Me
               </label>
               <label>
-                <Field data-cy="p2-start" type="radio" name="who_started" value="0" />
+                <Field type="radio" name="who_started" value="0" />
                 My opponent
               </label>
-              <button data-cy="gameconfig-submit" className="button-join" type="submit">
+              <button className="button-join" type="submit">
                 Create game
               </button>
             </Form>

@@ -16,15 +16,15 @@ const SignUpForm = () => {
 
   const validate = Yup.object({
     username: Yup.string()
-      .min(3, "Must be at least 3 characters.")
+      .min(3, "Must be at least 3 characters")
       .max(15, "Must be 15 characters or less")
       .required("Required"),
     password: Yup.string()
-      .min(8, "Password must be at least 8 charaters.")
-      .required("Password is required."),
+      .min(8, "Password must be at least 8 charaters")
+      .required("Password is required"),
     confirmPassword: Yup.string()
-      .oneOf([Yup.ref("password"), null], "Password must match.")
-      .required("Confirm password is required."),
+      .oneOf([Yup.ref("password"), null], "Password must match")
+      .required("Confirm password is required"),
   });
 
   const handleSubmit = async (values) => {
@@ -59,18 +59,17 @@ const SignUpForm = () => {
             <div className="container-block login">
               <h3>Sign Up</h3>
               <Form>
-                <TextField data-cy="username" label="Username" name="username" type="text" />
-                <TextField data-cy="password" label="Password" name="password" type="password" />
+                <TextField label="Username" name="username" type="text" />
+                <TextField label="Password" name="password" type="password" />
                 <TextField
-                  data-cy="confirm-password"
                   label="Confirm Password"
                   name="confirmPassword"
                   type="password"
                 />
-                <button data-cy="signup-submit" className="button-join" type="submit">
+                <button className="button-join" type="submit">
                   Register
                 </button>
-                <p data-cy="error-message" className="error">{error}</p>
+                <p className="error">{error}</p>
               </Form>
             </div>
           </div>
