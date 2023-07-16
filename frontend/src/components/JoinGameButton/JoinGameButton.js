@@ -27,7 +27,7 @@ export const JoinGameButton = ({ game_id, load }) => {
 
   return (
     <>
-      <button className="button-join" key={game_id} onClick={handleJoin}>
+      <button data-cy={`${game_id}-join`} className="button-join" key={game_id} onClick={handleJoin}>
         Join!
       </button>
       <p className="small-text error">{error}</p>
