@@ -41,6 +41,28 @@ Cypress.Commands.add('getThrough', () => {
   cy.get('.formcontainer-submit-button').click()
 })
 
+Cypress.Commands.add('signup', (username, password) => {
+  cy.visit("/signup");
+  cy.get('[data-cy="username"]').type(username);
+  cy.get('[data-cy="password"]').type(password);
+  cy.get('[data-cy="confirm-password"]').type(password);
+  cy.get('[data-cy="signup-submit"]').click();
+})
+
+// this command can now be used to shortcut the login process in end to end testing
+Cypress.Commands.add('login', (username, password) => {
+  cy.visit("/login");
+  cy.get('[data-cy="username"]').type(username);
+  cy.get('[data-cy="password"]').type(password);
+  cy.get('[data-cy="login-submit"]').click();
+})
+
+// this command can be used to make new posts
+Cypress.Commands.add('start_a_game', () => {
+  cy.visit("/");
+  cy.get('#new-post-button').click();
+})
+
 //
 //
 // -- This is a child command --

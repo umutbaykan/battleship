@@ -19,8 +19,12 @@ export const CurrentGames = () => {
       )}
       {Object.keys(currentGames).map((key) => (
         <div className="container game" key={key}>
-          <p className="small-text">Host: {currentGames[key].players}</p>
-          <p className="small-text">Board Size: {currentGames[key].size}</p>
+          <p data-cy={`${key}-lobby-host`} className="small-text">
+            Host: {currentGames[key].players}
+          </p>
+          <p data-cy={`${key}-lobby-size`} className="small-text">
+            Board Size: {currentGames[key].size}
+          </p>
           <p className="small-text">Ships:</p>
           <AllowedShipDisplayer
             allowedShips={currentGames[key].allowed_ships}
