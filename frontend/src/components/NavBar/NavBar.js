@@ -29,7 +29,7 @@ const NavBar = () => {
           <button className="topnav-button" onClick={handleLogout}>
             Logout
           </button>
-          <NavLink to={"/profile"}>{cookies.username}</NavLink>
+          <NavLink data-cy="navbar-username" to={"/profile"}>{cookies.username}</NavLink>
         </div>
       ) : (
         <div className="topnav-container">
